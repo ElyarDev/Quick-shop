@@ -1,0 +1,432 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl" class="dark">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quick Shop</title>
+    <!-- css  -->
+    <link rel="stylesheet" href="/src/output.css">
+    <!-- javascript -->
+    <script>
+        // On page load or when changing themes, best to add inline in `head` to avoid FOUC
+        document.documentElement.classList.toggle(
+            "dark",
+            localStorage.theme === "dark" ||
+            (!("theme" in localStorage) && window.matchMedia("(prefers-color-scheme: dark)").matches),
+        );
+    </script>
+</head>
+
+<body class="font-sahel dark:bg-black bg-neutral-800">
+    <!-- svg icons start  -->
+    <svg class="hidden">
+        <symbol id="home" viewBox="0 0 31 30" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path
+                d="M13.2124 4.1597L4.78918 10.9055C3.84111 11.6591 3.23338 13.2514 3.44001 14.4426L5.05658 24.1177C5.34829 25.8437 7.00132 27.2415 8.7516 27.2415H22.3649C24.103 27.2415 25.7682 25.8315 26.0599 24.1177L27.6765 14.4426C27.8709 13.2514 27.2632 11.6591 26.3273 10.9055L17.9041 4.17186C16.6035 3.12656 14.5008 3.12655 13.2124 4.1597Z"
+                stroke="currentColor" stroke-width="1.98895" stroke-linecap="round" stroke-linejoin="round" />
+            <path opacity="0.4"
+                d="M15.5582 19.5718C17.2364 19.5718 18.5969 18.2113 18.5969 16.5331C18.5969 14.8549 17.2364 13.4945 15.5582 13.4945C13.88 13.4945 12.5195 14.8549 12.5195 16.5331C12.5195 18.2113 13.88 19.5718 15.5582 19.5718Z"
+                stroke="currentColor" stroke-width="1.98895" stroke-linecap="round" stroke-linejoin="round" />
+        </symbol>
+        <symbol id="building" viewBox="0 0 25 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M2.82373 21.9143H22.7132" stroke="currentColor" stroke-width="1.98895" stroke-miterlimit="10"
+                stroke-linecap="round" stroke-linejoin="round" />
+            <path
+                d="M17.7408 2.02484H7.79602C4.81259 2.02484 3.81812 3.80495 3.81812 6.00274V21.9143H21.7187V6.00274C21.7187 3.80495 20.7242 2.02484 17.7408 2.02484Z"
+                stroke="currentColor" stroke-width="1.98895" stroke-miterlimit="10" stroke-linecap="round"
+                stroke-linejoin="round" />
+            <path opacity="0.4" d="M7.79614 16.4447H10.7796" stroke="currentColor" stroke-width="1.98895"
+                stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round" />
+            <path opacity="0.4" d="M14.7573 16.4447H17.7407" stroke="currentColor" stroke-width="1.98895"
+                stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round" />
+            <path opacity="0.4" d="M7.79614 11.9696H10.7796" stroke="currentColor" stroke-width="1.98895"
+                stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round" />
+            <path opacity="0.4" d="M14.7573 11.9696H17.7407" stroke="currentColor" stroke-width="1.98895"
+                stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round" />
+            <path opacity="0.4" d="M7.79614 7.49445H10.7796" stroke="currentColor" stroke-width="1.98895"
+                stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round" />
+            <path opacity="0.4" d="M14.7573 7.49445H17.7407" stroke="currentColor" stroke-width="1.98895"
+                stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round" />
+        </symbol>
+        <symbol id="people" viewBox="0 0 30 30" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path opacity="0.4"
+                d="M22.4167 8.76076C22.3438 8.74861 22.2587 8.74861 22.1858 8.76076C20.5084 8.69999 19.1714 7.32651 19.1714 5.62485C19.1714 3.88673 20.5692 2.48894 22.3073 2.48894C24.0454 2.48894 25.4432 3.89888 25.4432 5.62485C25.4311 7.32651 24.094 8.69999 22.4167 8.76076Z"
+                stroke="currentColor" stroke-width="1.98895" stroke-linecap="round" stroke-linejoin="round" />
+            <path opacity="0.4"
+                d="M21.1649 17.6094C22.8301 17.8889 24.6654 17.5972 25.9538 16.7342C27.6677 15.5917 27.6677 13.7199 25.9538 12.5773C24.6533 11.7144 22.7936 11.4226 21.1284 11.7143"
+                stroke="currentColor" stroke-width="1.98895" stroke-linecap="round" stroke-linejoin="round" />
+            <path opacity="0.4"
+                d="M7.79459 8.76076C7.86752 8.74861 7.9526 8.74861 8.02552 8.76076C9.70287 8.69999 11.0399 7.32651 11.0399 5.62485C11.0399 3.88673 9.6421 2.48894 7.90398 2.48894C6.16586 2.48894 4.76807 3.89888 4.76807 5.62485C4.78022 7.32651 6.11724 8.69999 7.79459 8.76076Z"
+                stroke="currentColor" stroke-width="1.98895" stroke-linecap="round" stroke-linejoin="round" />
+            <path opacity="0.4"
+                d="M9.04648 17.6094C7.38128 17.8889 5.54593 17.5972 4.25753 16.7342C2.54371 15.5917 2.54371 13.7199 4.25753 12.5773C5.55808 11.7144 7.41775 11.4226 9.08294 11.7143"
+                stroke="currentColor" stroke-width="1.98895" stroke-linecap="round" stroke-linejoin="round" />
+            <path
+                d="M15.1269 17.8403C15.054 17.8282 14.9689 17.8282 14.896 17.8403C13.2186 17.7796 11.8816 16.4061 11.8816 14.7044C11.8816 12.9663 13.2794 11.5685 15.0175 11.5685C16.7556 11.5685 18.1534 12.9784 18.1534 14.7044C18.1413 16.4061 16.8042 17.7917 15.1269 17.8403Z"
+                stroke="currentColor" stroke-width="1.98895" stroke-linecap="round" stroke-linejoin="round" />
+            <path
+                d="M11.5898 21.669C9.87599 22.8116 9.87599 24.6834 11.5898 25.8259C13.5346 27.1265 16.7191 27.1265 18.6638 25.8259C20.3776 24.6834 20.3776 22.8116 18.6638 21.669C16.7312 20.3806 13.5346 20.3806 11.5898 21.669Z"
+                stroke="currentColor" stroke-width="1.98895" stroke-linecap="round" stroke-linejoin="round" />
+        </symbol>
+        <symbol id="call" viewBox="0 0 28 27" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path
+                d="M25.1549 20.3122C25.1549 20.7099 25.0665 21.1188 24.8787 21.5166C24.6908 21.9144 24.4477 22.2901 24.1273 22.6436C23.5859 23.2403 22.9892 23.6713 22.3151 23.9475C21.6522 24.2238 20.9339 24.3674 20.1604 24.3674C19.0334 24.3674 17.829 24.1022 16.5582 23.5608C15.2875 23.0193 14.0168 22.2901 12.7571 21.3729C11.4864 20.4448 10.282 19.4171 9.13282 18.279C7.9947 17.1298 6.96708 15.9254 6.04995 14.6657C5.14387 13.4061 4.41459 12.1464 3.8842 10.8978C3.35382 9.63812 3.08862 8.4337 3.08862 7.28453C3.08862 6.53315 3.22122 5.81492 3.48641 5.15194C3.75161 4.4779 4.1715 3.85912 4.75713 3.30663C5.46431 2.6105 6.23779 2.26796 7.05547 2.26796C7.36487 2.26796 7.67426 2.33426 7.9505 2.46685C8.23779 2.59945 8.49194 2.79835 8.69083 3.08564L11.2544 6.6989C11.4533 6.97514 11.5969 7.22928 11.6964 7.47238C11.7958 7.70442 11.8511 7.93647 11.8511 8.14641C11.8511 8.4116 11.7737 8.6768 11.619 8.93094C11.4754 9.18508 11.2654 9.45028 11.0002 9.71547L10.1604 10.5884C10.0389 10.7099 9.98365 10.8536 9.98365 11.0304C9.98365 11.1188 9.9947 11.1961 10.0168 11.2845C10.05 11.3729 10.0831 11.4392 10.1052 11.5055C10.3041 11.8702 10.6466 12.3453 11.1328 12.9199C11.6301 13.4945 12.1604 14.0801 12.735 14.6657C13.3317 15.2514 13.9063 15.7928 14.4919 16.2901C15.0665 16.7762 15.5417 17.1077 15.9174 17.3066C15.9726 17.3287 16.0389 17.3619 16.1162 17.395C16.2046 17.4282 16.293 17.4392 16.3925 17.4392C16.5803 17.4392 16.724 17.3729 16.8455 17.2514L17.6853 16.4227C17.9616 16.1464 18.2267 15.9365 18.4809 15.8039C18.735 15.6492 18.9892 15.5718 19.2654 15.5718C19.4754 15.5718 19.6964 15.616 19.9395 15.7155C20.1825 15.8149 20.4367 15.9586 20.7129 16.1464L24.3704 18.7431C24.6577 18.942 24.8566 19.174 24.9781 19.4503C25.0886 19.7265 25.1549 20.0028 25.1549 20.3122Z"
+                stroke="currentColor" stroke-width="1.98895" stroke-miterlimit="10" />
+            <path opacity="0.4"
+                d="M21.3205 10.0028C21.3205 9.33978 20.8012 8.32321 20.0277 7.49448C19.3205 6.73205 18.3813 6.13536 17.4531 6.13536"
+                stroke="currentColor" stroke-width="1.98895" stroke-linecap="round" stroke-linejoin="round" />
+            <path opacity="0.4" d="M25.1879 10.0028C25.1879 5.72652 21.7294 2.26796 17.4531 2.26796"
+                stroke="currentColor" stroke-width="1.98895" stroke-linecap="round" stroke-linejoin="round" />
+        </symbol>
+        <symbol id="sun" viewBox="0 0 29 28" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path
+                d="M14.0223 21.5831C18.2105 21.5831 21.6056 18.1879 21.6056 13.9997C21.6056 9.81159 18.2105 6.41641 14.0223 6.41641C9.83414 6.41641 6.43896 9.81159 6.43896 13.9997C6.43896 18.1879 9.83414 21.5831 14.0223 21.5831Z"
+                stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+            <path opacity="0.4"
+                d="M22.3521 22.3298L22.2005 22.1781M22.2005 5.82143L22.3521 5.66977L22.2005 5.82143ZM5.69214 22.3298L5.8438 22.1781L5.69214 22.3298ZM14.0221 2.42643V2.3331V2.42643ZM14.0221 25.6664V25.5731V25.6664ZM2.4488 13.9998H2.35547H2.4488ZM25.6888 13.9998H25.5955H25.6888ZM5.8438 5.82143L5.69214 5.66977L5.8438 5.82143Z"
+                stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+        </symbol>
+        <symbol id="shopping-cart" viewBox="0 0 29 28" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path
+                d="M2.35559 2.3331H4.3856C5.6456 2.3331 6.63726 3.4181 6.53226 4.66643L5.56392 16.2864C5.40059 18.1881 6.90558 19.8214 8.81892 19.8214H21.2439C22.9239 19.8214 24.3939 18.4448 24.5223 16.7764L25.1523 8.02644C25.2923 6.08977 23.8223 4.51476 21.8739 4.51476H6.81227"
+                stroke="currentColor" stroke-width="1.98895" stroke-miterlimit="10" stroke-linecap="round"
+                stroke-linejoin="round" />
+            <path opacity="0.4"
+                d="M18.9806 25.6664C19.786 25.6664 20.4389 25.0135 20.4389 24.2081C20.4389 23.4027 19.786 22.7498 18.9806 22.7498C18.1751 22.7498 17.5222 23.4027 17.5222 24.2081C17.5222 25.0135 18.1751 25.6664 18.9806 25.6664Z"
+                stroke="currentColor" stroke-width="1.98895" stroke-miterlimit="10" stroke-linecap="round"
+                stroke-linejoin="round" />
+            <path opacity="0.4"
+                d="M9.6473 25.6664C10.4527 25.6664 11.1056 25.0135 11.1056 24.2081C11.1056 23.4027 10.4527 22.7498 9.6473 22.7498C8.84188 22.7498 8.18896 23.4027 8.18896 24.2081C8.18896 25.0135 8.84188 25.6664 9.6473 25.6664Z"
+                stroke="currentColor" stroke-width="1.98895" stroke-miterlimit="10" stroke-linecap="round"
+                stroke-linejoin="round" />
+            <path opacity="0.4" d="M10.5221 9.3331H24.5221" stroke="currentColor" stroke-width="1.98895"
+                stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round" />
+        </symbol>
+        <symbol id="profile-tick" viewBox="0 0 29 28" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path opacity="0.4" d="M16.8689 22.2247L18.6422 23.9981L22.1889 20.4514" stroke="currentColor"
+                stroke-width="1.98895" stroke-linecap="round" stroke-linejoin="round" />
+            <path opacity="0.4"
+                d="M14.2089 12.6814C14.0922 12.6698 13.9522 12.6698 13.8239 12.6814C11.0472 12.5881 8.84221 10.3131 8.84221 7.5131C8.83054 4.65477 11.1522 2.3331 14.0105 2.3331C16.8689 2.3331 19.1905 4.65477 19.1905 7.5131C19.1905 10.3131 16.9739 12.5881 14.2089 12.6814Z"
+                stroke="currentColor" stroke-width="1.98895" stroke-linecap="round" stroke-linejoin="round" />
+            <path
+                d="M14.0105 25.4448C11.8871 25.4448 9.77547 24.9081 8.16547 23.8348C5.34214 21.9448 5.34214 18.8648 8.16547 16.9864C11.3738 14.8398 16.6355 14.8398 19.8438 16.9864"
+                stroke="currentColor" stroke-width="1.98895" stroke-linecap="round" stroke-linejoin="round" />
+        </symbol>
+        <symbol id="element-equal" viewBox="0 0 22 22" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path
+                d="M20.1667 7.58081V3.87748C20.1667 2.41998 19.58 1.83331 18.1225 1.83331H14.4192C12.9617 1.83331 12.375 2.41998 12.375 3.87748V7.58081C12.375 9.03831 12.9617 9.62498 14.4192 9.62498H18.1225C19.58 9.62498 20.1667 9.03831 20.1667 7.58081Z"
+                stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+            <path
+                d="M9.62516 7.80998V3.64831C9.62516 2.35581 9.0385 1.83331 7.581 1.83331H3.87766C2.42016 1.83331 1.8335 2.35581 1.8335 3.64831V7.80081C1.8335 9.10248 2.42016 9.61581 3.87766 9.61581H7.581C9.0385 9.62498 9.62516 9.10248 9.62516 7.80998Z"
+                stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+            <path
+                d="M9.62516 18.1225V14.4192C9.62516 12.9617 9.0385 12.375 7.581 12.375H3.87766C2.42016 12.375 1.8335 12.9617 1.8335 14.4192V18.1225C1.8335 19.58 2.42016 20.1667 3.87766 20.1667H7.581C9.0385 20.1667 9.62516 19.58 9.62516 18.1225Z"
+                stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+            <path opacity="0.4" d="M13.75 14.2083H19.25" stroke="currentColor" stroke-width="1.5"
+                stroke-linecap="round" />
+            <path opacity="0.4" d="M13.75 17.875H19.25" stroke="currentColor" stroke-width="1.5"
+                stroke-linecap="round" />
+        </symbol>
+        <symbol id="close" viewBox="0 0 22 22" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path
+                d="M11.0002 20.1667C16.0418 20.1667 20.1668 16.0417 20.1668 11C20.1668 5.95837 16.0418 1.83337 11.0002 1.83337C5.9585 1.83337 1.8335 5.95837 1.8335 11C1.8335 16.0417 5.9585 20.1667 11.0002 20.1667Z"
+                stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+            <g opacity="0.4">
+                <path d="M8.40576 13.5941L13.5941 8.40576" stroke="currentColor" stroke-width="1.5"
+                    stroke-linecap="round" stroke-linejoin="round" />
+                <path d="M13.5941 13.5941L8.40576 8.40576" stroke="currentColor" stroke-width="1.5"
+                    stroke-linecap="round" stroke-linejoin="round" />
+            </g>
+        </symbol>
+        <symbol id="moon" viewBox="0 0 28 28" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path
+                d="M2.36811 14.49C2.78811 20.4983 7.88645 25.3867 13.9881 25.655C18.2931 25.8417 22.1431 23.835 24.4531 20.6733C25.4098 19.3783 24.8964 18.515 23.2981 18.8067C22.5164 18.9467 21.7114 19.005 20.8714 18.97C15.1664 18.7367 10.4998 13.965 10.4764 8.33002C10.4648 6.81335 10.7798 5.37835 11.3514 4.07168C11.9814 2.62502 11.2231 1.93668 9.76478 2.55502C5.14478 4.50335 1.98311 9.15835 2.36811 14.49Z"
+                stroke="currentColor" stroke-width="1.98895" stroke-linecap="round" stroke-linejoin="round" />
+        </symbol>
+        <symbol id="burger" viewBox="0 0 24 15" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <line y1="-1" x2="22.0227" y2="-1" transform="matrix(1 0 -0.0293503 0.999569 0.988281 2.5)"
+                stroke="currentColor" stroke-width="2" />
+            <line y1="-1" x2="22.0227" y2="-1" transform="matrix(1 0 -0.0293503 0.999569 0.988281 8.5)"
+                stroke="currentColor" stroke-width="2" />
+            <line y1="-1" x2="22.0227" y2="-1" transform="matrix(1 0 -0.0293503 0.999569 0.988281 14.5)"
+                stroke="currentColor" stroke-width="2" />
+        </symbol>
+    </svg>
+    <!-- svg icons end  -->
+
+    <!-- start menu  -->
+    <section
+        class="h-16 sm:h-24 md:h-27 xl:h-31.5 z-50 bg-linear-to-b from-black to-transparent items-end absolute w-full">
+        <div
+            class="my-container flex justify-between items-center xl:items-end relative py-3.5 sm:py-4.5 md:py-5.5 xl:py-7.5 border-b border-neutral-500">
+            <!-- start nav  -->
+            <nav class="hidden xl:flex">
+                <ul class="flex gap-x-5">
+                    <li>
+                        <a href="#" class="text-xl text-white flex items-center hover:text-orange-500 active relative">
+                            <svg class="w-7 h-7">
+                                <use href="#home"></use>
+                            </svg>
+                            <span>صفحه اصلی</span>
+                        </a>
+                    </li>
+
+                    <li class="relative group">
+                        <a href="#" class="text-xl text-white flex items-center hover:text-orange-500 relative">
+                            <svg class="w-7 h-7">
+                                <use href="#building"></use>
+                            </svg>
+                            <span>فروشگاه</span>
+                        </a>
+                        <!-- start tggle menu  -->
+                        <div
+                            class="absolute top-full opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all delay-200">
+                            <ul
+                                class=" bg-white dark:bg-neutral-800 dark:text-white w-67 py-2.5 px-4 rounded-2xl translate-y-10 child:text-lg child:py-1.25 divide-y divide-neutral-50">
+                                <li>
+                                    <a href="#"
+                                        class="transition-colors gap-x-1.5 flex items-center h-[43] rounded-xl hover:text-orange-500 hover:bg-orange-50 dark:hover:bg-neutral-700 px-1.25 py-1.5">
+                                        <svg class="size-5.5">
+                                            <use href="#element-equal"></use>
+                                        </svg>
+                                        <span>کفش های زنانه</span>
+                                    </a>
+                                </li>
+
+                                <li>
+                                    <a href="#"
+                                        class="transition-colors gap-x-1.5 flex items-center h-[43] rounded-xl hover:text-orange-500 hover:bg-orange-50 dark:hover:bg-neutral-700 px-1.25 py-1.5">
+                                        <svg class="size-5.5">
+                                            <use href="#element-equal"></use>
+                                        </svg>
+                                        <span>کفشهای مردانه</span>
+                                    </a>
+                                </li>
+
+                                <li>
+                                    <a href="#"
+                                        class="transition-colors gap-x-1.5 flex items-center h-[43] rounded-xl hover:text-orange-500 hover:bg-orange-50 dark:hover:bg-neutral-700 px-1.25 py-1.5">
+                                        <svg class="size-5.5">
+                                            <use href="#element-equal"></use>
+                                        </svg>
+                                        <span>کیف های زنانه</span>
+                                    </a>
+                                </li>
+
+                                <li>
+                                    <a href="#"
+                                        class="transition-colors gap-x-1.5 flex items-center h-[43] rounded-xl hover:text-orange-500 hover:bg-orange-50 dark:hover:bg-neutral-700 px-1.25 py-1.5">
+                                        <svg class="size-5.5">
+                                            <use href="#element-equal"></use>
+                                        </svg>
+                                        <span>کیف های زنانه</span>
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
+                        <!-- end tggle menu  -->
+                    </li>
+
+                    <li>
+                        <a href="#" class="text-xl text-white flex items-center hover:text-orange-500 relative">
+                            <svg class="w-7 h-7">
+                                <use href="#people"></use>
+                            </svg>
+                            <span>درباره ما</span>
+                        </a>
+                    </li>
+
+                    <li>
+                        <a href="#" class="text-xl text-white flex items-center hover:text-orange-500 relative">
+                            <svg class="w-7 h-7">
+                                <use href="#call"></use>
+                            </svg>
+                            <span>تماس با ما</span>
+                        </a>
+                    </li>
+                </ul>
+            </nav>
+            <!-- end nav  -->
+
+            <!-- start mobile nav  -->
+            <div class="xl:hidden">
+                <svg class="text-white w-5.5 h-3 sm:w-8 sm:h-4.5 md:w-11 md:h-6">
+                    <use href="#burger"></use>
+                </svg>
+            </div>
+            <!-- end mobile nav  -->
+
+            <!-- start logo  -->
+            <div
+                class="w-30 h-6.5 sm:w-45 sm:h-10 md:w-60 md:h-13 xl:w-53.5 xl:h-11 absolute right-14 xl:left-0 xl:right-0 xl:mx-auto">
+                <img src="/public/imgs/Group 1.svg" alt="">
+            </div>
+            <!-- end logo  -->
+
+            <!-- start login -->
+            <div class="flex gap-x-2.5">
+                <button id="toggle-tjeme-btn"
+                    class="border border-neutral-500 text-white flex justify-center items-center rounded-[10px] md:rounded-2xl size-7.5 sm:size-10 md:size-12 xl:p-2.5 hover:text-orange-500 hover:border-orange-500 cursor-pointer">
+                    <svg class="size-4.5 sm:size-5 md:size-6 xl:size-7 dark:hidden">
+                        <use href="#sun"></use>
+                    </svg>
+                    <svg class="size-4.5 sm:size-5 md:size-6 xl:size-7 hidden dark:inline-block">
+                        <use href="#moon"></use>
+                    </svg>
+                </button>
+
+                <!-- start shopping cart  -->
+                <div
+                    class="group relative border border-neutral-500 flex justify-center items-center text-white rounded-[10px] md:rounded-2xl size-7.5 sm:size-10 md:size-12 xl:p-2.5 hover:text-orange-500 hover:border-orange-500">
+                    <svg class="size-4.5 sm:size-5 md:size-6 xl:size-7">
+                        <use href="#shopping-cart"></use>
+                    </svg>
+
+                    <span
+                        class="size-4 xl:size-5 rounded-full bg-orange-500 text-white absolute right-0 top-0 translate-x-1/2 -translate-y-1/2 flex items-center justify-center text-xs md:text-lg">
+                        2
+                    </span>
+
+                    <div
+                        class="absolute left-0 top-full opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all delay-200">
+                        <div class="bg-white dark:bg-neutral-700 w-83 rounded-2xl p-4 mt-10">
+                            <!-- start shopping cart items  -->
+                            <div
+                                class="chile:pb-2 child:mb-2 child:border-b child:border-neutral-50 max-h-70 overflow-y-auto">
+                                <!-- shopping cart item  -->
+                                <div class="flex items-center">
+                                    <div>
+                                        <!-- shopping cart icon -->
+                                        <svg class="text-neutral-500 dark:text-white size-5.5">
+                                            <use href="#close"></use>
+                                        </svg>
+                                    </div>
+                                    <!-- shopping cart product -->
+                                    <div class="w-25 shrink-0">
+                                        <img src="/public/imgs/p2.png" alt="product 1">
+                                    </div>
+                                    <!-- shopping cart description  -->
+                                    <div class="text-black dark:text-white text-right grow">
+                                        <h6 class="line-clamp-1">کیف کلاسیک مهرخ</h6>
+                                        <div class="text-neutral-500 dark:text-white">
+                                            <span>1</span>
+                                            <span>عدد</span>
+                                        </div>
+
+                                        <div class="text-left text-neutral-500 dark:text-white">
+                                            <span class="font-sahel-semibold">450.000</span>
+                                            <span>تومان</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- shopping cart item  -->
+                                <div class="flex items-center">
+                                    <div>
+                                        <!-- shopping cart icon -->
+                                        <svg class="text-neutral-500 dark:text-white size-5.5">
+                                            <use href="#close"></use>
+                                        </svg>
+                                    </div>
+                                    <!-- shopping cart product -->
+                                    <div class="w-25 shrink-0">
+                                        <img src="/public/imgs/p9.png" alt="product 1">
+                                    </div>
+                                    <!-- shopping cart description  -->
+                                    <div class="text-black dark:text-white text-right grow">
+                                        <h6 class="line-clamp-1">کفش مجلسی لاله کفش مجلسی لاله</h6>
+                                        <div class="text-neutral-500 dark:text-white">
+                                            <span>1</span>
+                                            <span>عدد</span>
+                                        </div>
+
+                                        <div class="text-left text-neutral-500 dark:text-white">
+                                            <span class="font-sahel-semibold">750.000</span>
+                                            <span>تومان</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- end shopping cart items  -->
+
+                            <!-- start shopping cart price and pay -->
+                            <div>
+                                <div class="text-black dark:text-white flex items-center justify-between">
+                                    <span>جمع کل</span>
+                                    <div>
+                                        <span class="font-sahel-semibold text-xl">1.200.000</span>
+                                        <span>تومان</span>
+                                    </div>
+                                </div>
+
+                                <div class="flex justify-between mt-4">
+                                    <a href="#"
+                                        class="text-white bg_gradient_orange_main h-9.75 w-36.5 flex items-center justify-center rounded-xl text-lg">
+                                        تایید و پرداخت
+                                    </a>
+
+                                    <a href="#"
+                                        class="text-orange-500 border border-orange-500 h-9.75 w-36.5 flex items-center justify-center rounded-xl text-lg">
+                                        سبد خرید
+                                    </a>
+                                </div>
+                            </div>
+                            <!-- end shopping cart price and pay -->
+                        </div>
+                    </div>
+                </div>
+                <!-- end shopping cart  -->
+
+                <button
+                    class="border border-orange-500 text-orange-500 cursor-pointer bg_gradient_orange hover:text-white flex justify-center items-center rounded-[10px] md:rounded-2xl size-7.5 sm:size-10 md:size-auto xl:p-2.5">
+                    <svg class="size-4.5 sm:size-5 md:size-6 xl:size-7">
+                        <use href="#profile-tick"></use>
+                    </svg>
+                    <span class="hidden md:inline-block">ورود و ثبت نام</span>
+                </button>
+            </div>
+            <!-- end login  -->
+        </div>
+    </section>
+    <!-- end menu  -->
+
+    <!-- start header  -->
+    <header class="relative bg-[url(../public/imgs/image.png)] h-180 bg-center bg-cover flex items-center">
+        <div class="my-container mb-20">
+            <div class="text-white">
+                <p class="text-5xl font-sahel-bold">تجربه راحت ترین خرید با کویک شاپ</p>
+                <p class="w-198.5 text-[26px] leading-12.5 mt-4 font-sahel-light">
+                    با هر
+                    سلیقه ای میتونی از کویک شاپ خرید کنی! تنوع بالای کیف و کفش مردانه و زنانه و ارسال رایگان خرید رو
+                    برات آسون تر می کنه!
+                </p>
+            </div>
+        </div>
+
+        <!-- haeder bottom svg  -->
+        <svg class="w-full text-white dark:text-neutral-800 absolute bottom-0 translate-y-3 lg:translate-y-5"
+            viewBox="0 0 1920 194" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <mask id="mask0_241_2119" style="mask-type:alpha" maskUnits="userSpaceOnUse" x="-5" y="0" width="1928"
+                height="194">
+                <path
+                    d="M-0.434204 60.9999C-0.434204 60.9999 404.126 141.465 953.077 141.465C1502.03 141.465 1918.57 60.9999 1918.57 60.9999V194H-0.434204V60.9999Z"
+                    fill="currentColor" />
+                <path
+                    d="M-1.43665 0.897095C-1.43665 0.897095 401.883 92.4746 952.077 107.3C1502.27 122.126 1921.91 52.7234 1921.91 52.7234L1918.34 186.032L-4.99997 134.206L-1.43665 0.897095Z"
+                    fill="currentColor" fill-opacity="0.6" />
+                <path
+                    d="M-2.70947 29.1759C-2.70947 29.1759 402.011 115.744 952.757 123.745C1503.5 131.746 1922.57 57.1448 1922.57 57.1448L1920.64 190.487L-4.63103 162.518L-2.70947 29.1759Z"
+                    fill="currentColor" fill-opacity="0.6" />
+            </mask>
+            <g mask="url(#mask0_241_2119)">
+                <rect x="-0.434326" y="-3.00003" width="1920" height="179" fill="currentColor" />
+            </g>
+        </svg>
+    </header>
+    <!-- end header  -->
+
+    <!-- script  -->
+    <script src="/public/js/script.js"></script>
+</body>
+
+</html>

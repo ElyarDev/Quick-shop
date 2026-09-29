@@ -1,0 +1,61 @@
+@import "tailwindcss";
+
+@custom-variant dark (&:where(.dark, .dark *));
+
+@theme {
+    --font-sahel-light: "sahel light";
+    --font-sahel: "sahel";
+    --font-sahel-semibold: "sahel semiBold";
+    --font-sahel-bold: "sahel bold";
+}
+
+@layer utilities {
+    .my-container {
+        @apply w-9/10 mx-auto;
+    }
+
+    .bg_gradient_orange:hover {
+        @apply bg-linear-to-r from-[#ff8904] to-[#ff6900];
+    }
+
+    .bg_gradient_orange_main {
+        @apply bg-linear-to-r from-[#ff8904] to-[#ff6900];
+    }
+
+    nav a.active {
+        @apply text-orange-500;
+    }
+
+    nav a.active::before {
+        @apply content-[''] w-full h-1 bg-linear-to-r from-[#ff8904] to-[#ff6900] absolute -bottom-7.5 translate-y-0.5 rounded-full;
+    }
+}
+
+@layer base {
+    @font-face {
+        font-family: 'sahel light';
+        src: url('/public/fonts/Sahel-Light-FD.woff2') format('woff2');
+        font-display: swap;
+    }
+
+    @font-face {
+        font-family: 'sahel';
+        src: url('/public/fonts/Sahel-FD.woff2') format('woff2');
+        font-display: swap;
+    }
+
+    @font-face {
+        font-family: 'sahel semiBold';
+        src: url('/public/fonts/Sahel-SemiBold-FD.woff2') format('woff2');
+        font-display: swap;
+    }
+
+    @font-face {
+        font-family: 'sahel bold';
+        src: url('/public/fonts/Sahel-Bold-FD.woff2') format('woff2');
+        font-display: swap;
+    }
+}
+
+@custom-variant child "&>*";
+@custom-variant child-hover "&>*:hover";
